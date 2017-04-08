@@ -16,12 +16,14 @@
 			</div>
 		</div>
 		<div class="panel-body">
-			<form method="GET" class="form-horizontal" th:action="@{/titulos}" th:object="${filtro}">
+			<form method="GET" class="form-horizontal" th:action="@{/colaboradores}" th:object="${collaboratorFilter}">
 			<div class="form-group">
 				<div class="col-sm-4">
 					<div class="input-group">
-						<input class="form-control" placeholder="Qual o t&iacute;tulo que voc&ecirc; est&aacute; procurando?"
-							autofocus="autofocus" th:field="*{descricao}"></input>
+						<input class="form-control" placeholder="Qual o nome está procurando?" autofocus="autofocus" th:field="*{name}" />
+					</div>				
+					<div class="input-group">
+						<input class="form-control" placeholder="Qual a descrição está procurando?" th:field="*{description}" />
 						<span class="input-group-btn">
 							<button type="submit" class="btn btn-default">
 								<i class="glyphicon glyphicon-search"></i>
@@ -35,41 +37,22 @@
 				<table class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<th class="text-center col-md-1">#</th>
-							<th>Descri&ccedil;&atilde;o</th>
-							<th class="text-center col-md-2">Data de vencimento</th>
-							<th class="text-right col-md-2">Valor</th>
-							<th class="text-center col-md-2">Status</th>
-							<th class="col-md-1"></th>
+							<th class="text-center">#</th>
+							<th class="text-left">Nome</th>
+							<th class="text-left">Descri&ccedil;&atilde;o</th>
+							<th class="text-left">Espertises</th>
+							<th class="text-left">Local de Trabalho</th>
+							<th class="text-left">Função</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="titulo : ${titulos}">
-							<td class="text-center" th:text="${colaborador.codigo}">1</td>
-							<td th:text="${titulo.descricao}"></td>
-							<td class="text-center" th:text="${{colaborador.dataVencimento}}"></td>
-							<td class="text-right" th:text="|R$ ${{colaborador.valor}}|"></td>
-							<td class="text-center" th:attr="data-role=${colaborador.codigo}">
-								<span class="label" th:text="${titulo.status.descricao}"
-		   							th:classappend="${titulo.pendente ? 'label-danger' : 'label-success'}"></span>
-							</td>
-							<td class="text-center">
-								<a class="btn btn-link btn-xs" th:href="@{/colaboradores/{codigo}(codigo=${titulo.codigo})}"
-									title="Editar" rel="tooltip" data-placement="top">
-									<span class="glyphicon glyphicon-pencil"></span>
-								</a>
-								<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModal" 
-									th:attr="data-codigo=${titulo.codigo}, data-descricao=${titulo.descricao}"
-									title="Excluir" rel="tooltip" data-placement="top">
-									<span class="glyphicon glyphicon-remove"></span>
-								</a>
-								<a class="btn btn-link btn-xs js-atualizar-status" th:if="${titulo.pendente}"
-									title="Receber" rel="tooltip" data-placement="top"
-									th:attr="data-codigo=${titulo.codigo}"
-									th:href="@{/colaboradores/{codigo}/receber(codigo=${titulo.codigo})}">
-									<span class="glyphicon glyphicon-check"></span>
-								</a>
-							</td>
+						<tr th:each="collaborator : ${collaborators}">
+							<td class="text-center" th:text="${collaborator.id}">1</td>
+							<td class="text-left" th:text="${collaborator.name}">Pedrão</td>
+							<td class="text-left" th:text="${collaborator.description}">Profissional Experiente</td>
+							<td class="text-left" th:text="${collaborator.skills}">Java EE, HTML5, CSS3, javascript</td>
+							<td class="text-left" th:text="#{|workstation.${collaborator.workstation}|}">Home Office</td>
+							<td class="text-left" th:text="#{|role.${collaborator.role}|}">Programador Java</td>
 						</tr>
 						<tr>
 							<td colspan="6" th:if="${#lists.isEmpty(colaboradores)}">Nenhum colaborador encontrado!</td>

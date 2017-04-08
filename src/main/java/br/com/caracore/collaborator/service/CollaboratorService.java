@@ -14,6 +14,8 @@ import br.com.caracore.collaborator.repository.filter.CollaboratorFilter;
 @Component
 public class CollaboratorService {
 
+	final private String FILTER_ALL = "%";
+	
 	@Autowired
 	private CollaboratorRepository collaboratorRepository;
 
@@ -25,9 +27,20 @@ public class CollaboratorService {
 		return collaboratorRepository.findOne(codigo);
 	}
 
-	public List<Collaborator> filtrar(CollaboratorFilter filtro) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Collaborator> filtrar(CollaboratorFilter filter) {
+		List <Collaborator> listar = null;
+		String name = FILTER_ALL;
+		String description = FILTER_ALL;
+		if (filter != null) {
+			if (filter.getName() != null) {
+				name = filter.getName();
+			}
+			if (filter.getDescription() != null) {
+				name = filter.getDescription();
+			}
+			listar = collaboratorRepository.findByNameContainingIgnoreCaseAndDescriptionContainingIgnoreCase(name, description);
+		}
+		return listar;
 	}
 
 	public void salvar(Collaborator collaborator) {
@@ -38,10 +51,4 @@ public class CollaboratorService {
 		collaboratorRepository.delete(codigo);
 		
 	}
-
-	public String receber(Long codigo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

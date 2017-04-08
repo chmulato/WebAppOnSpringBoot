@@ -15,17 +15,17 @@ public class LoginService {
 
 	@Autowired
 	private LoginRepository loginRepository;
-	
-	public List<Login> listAll() {
-		return loginRepository.findAll();
-	}
 
-	public String validar() {
-		return "TESTE";
+	public boolean validate(String username, String password) {
+		boolean validate = false;
+		Login login = loginRepository.findByUsernameAndPassword(username, password);
+		if (login != null) {
+			validate = true;
+		}
+		return validate;
 	}
 
 	public List<Login> buscarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		return loginRepository.findAll();
 	}
 }

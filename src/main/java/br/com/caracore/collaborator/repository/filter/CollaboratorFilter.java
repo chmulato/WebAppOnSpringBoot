@@ -1,15 +1,25 @@
 package br.com.caracore.collaborator.repository.filter;
 
 public class CollaboratorFilter {
+
+	private String name;
 	
-	private String descricao;
+	private String description;
 
-	public String getDescricao() {
-		return descricao;
+	public String getName() {
+		return name;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setName(String name) {
+		this.name = name;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 }

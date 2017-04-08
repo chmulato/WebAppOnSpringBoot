@@ -7,7 +7,7 @@
 <title>Cadastro de Colaboradores</title>
 </head>
 <section layout:fragment="conteudo">
-	<form class="form-horizontal" method="POST" th:action="@{/colaboradores}" th:object="${titulo}">
+	<form class="form-horizontal" method="POST" th:action="@{/colaboradores}" th:object="${collaborator}">
 		<div layout:include="MensagemGeral"></div>
 		<div layout:include="MensagemErro"></div>
 		<div class="panel panel-default">
@@ -19,39 +19,37 @@
 			</div>
 			<div class="panel-body">
 			
-				<input type="hidden" th:field="*{codigo}" />
+				<input type="hidden" th:field="*{id}" />
 				
-				<div class="form-group" th:classappend="${#fields.hasErrors('descricao')} ? has-error">
-					<label for="descricao" class="col-sm-2 control-label">Descri&ccedil;&atilde;o</label>
-					<div class="col-sm-4">
-						<input type="text" class="form-control" id="descricao" th:field="*{descricao}" />
-					</div>
-				</div>
-				
-				<div class="form-group" th:classappend="${#fields.hasErrors('dataVencimento')} ? has-error">
-					<label for="dataVencimento" class="col-sm-2 control-label">Data de vencimento</label>
-					<div class="col-sm-2">
-						<input type="text" class="form-control"	id="dataVencimento" th:field="*{dataVencimento}"
-							data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
-							data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom" />
-					</div>
-				</div>
-				
-				<div class="form-group" th:classappend="${#fields.hasErrors('valor')} ? has-error">
-					<label for="valor" class="col-sm-2 control-label">Valor</label>
-					<div class="col-sm-2">
-						<input type="text" class="form-control js-currency" id="valor" th:field="*{valor}" />
-					</div>
+				<div class="form-group">
+					<label for="name" class="col-sm-2 control-label">Nome</label>
+					<input id="name" type="text" class="form-control" th:field="*{name}" />
 				</div>
 				
 				<div class="form-group">
-					<label for="status" class="col-sm-2 control-label">Status</label>
-					<div class="col-sm-2">
-						<select class="form-control" id="status" name="status" th:field="*{status}">
-							<option th:each="status : ${todosStatusCollaborator}"
-								th:value="${status}" th:text="${status.descricao}"></option>
-						</select>
-					</div>
+					<label for="description" class="col-sm-2 control-label">Descri&ccedil;&atilde;o</label>
+					<input id="description" type="text" class="form-control" th:field="*{description}" />
+				</div>
+
+				<div class="form-group">
+					<label for="skills" class="col-sm-2 control-label">Espertises</label>
+					<input id="skills" type="text" class="form-control" th:field="*{skills}" />
+				</div>
+				
+				<div class="form-group">
+					<label for="role">Função</label>
+					<select id="role" class="form-control" th:field="*{role}">
+						<option value="">Selecione função</option>
+						<option th:each="role : ${roles}" th:value="${role}" th:text="#{|role.${role}|}"></option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label for="workstation">Local</label>
+					<select id="workstation" class="form-control" th:field="*{workstation}">
+						<option value="">Selecione local</option>
+						<option th:each="workstation : ${workstations}" th:value="${workstation}" th:text="#{|workstation.${workstation}|}"></option>
+					</select>
 				</div>
 				
 				<div class="form-group">

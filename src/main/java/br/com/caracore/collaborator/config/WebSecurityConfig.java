@@ -44,19 +44,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		List<Login> listar = loginService.buscarTodos();
 		
-		for (Login LOGIN : listar) {
+		if (listar != null && listar.size() > 0) {
 			
-			String usr = LOGIN.getUsername(); 
-			String pwd = LOGIN.getPassword(); 
-			String roles = LOGIN.getPerfil().toString(); 
-			
-			if (roles.equals("ADMINISTRADOR")) {
-				auth.inMemoryAuthentication().withUser(usr).password(pwd).roles("ADMINISTRADOR","OPERADOR","VISITANTE");
-			} else if (roles.equals("OPERADOR")) {
-				auth.inMemoryAuthentication().withUser(usr).password(pwd).roles("OPERADOR", "VISITANTE");
-			} else if (roles.equals("VISITANTE")) {
-				auth.inMemoryAuthentication().withUser(usr).password(pwd).roles("VISITANTE");
+			for (Login LOGIN : listar) {
+				
+				String usr = LOGIN.getUsername(); 
+				String pwd = LOGIN.getPassword(); 
+				String roles = LOGIN.getPerfil().toString(); 
+				
+				if (roles.equals("ADMINISTRADOR")) {
+					auth.inMemoryAuthentication().withUser(usr).password(pwd).roles("ADMINISTRADOR","OPERADOR","VISITANTE");
+				} else if (roles.equals("OPERADOR")) {
+					auth.inMemoryAuthentication().withUser(usr).password(pwd).roles("OPERADOR", "VISITANTE");
+				} else if (roles.equals("VISITANTE")) {
+					auth.inMemoryAuthentication().withUser(usr).password(pwd).roles("VISITANTE");
+				}
+				
 			}
+
 		}
 	}
 
