@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.caracore.collaborator.model.Collaborator;
-import br.com.caracore.collaborator.model.StatusCollaborator;
+import br.com.caracore.collaborator.model.Role;
 import br.com.caracore.collaborator.repository.filter.CollaboratorFilter;
 import br.com.caracore.collaborator.service.CollaboratorService;
 
@@ -33,7 +33,7 @@ public class CollaboratorController {
 	@RequestMapping("/novo")
 	public ModelAndView novo() {
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		mv.addObject("todosStatusCollaborator", StatusCollaborator.values());
+		mv.addObject("todosStatusCollaborator", Role.values());
 		mv.addObject(new Collaborator());
 		return mv;
 	}
@@ -83,7 +83,7 @@ public class CollaboratorController {
 	}
 	
 	@ModelAttribute("todosStatusCollaborator")
-	public List<StatusCollaborator> todosStatusCollaborator() {
-		return Arrays.asList(StatusCollaborator.values());
+	public List<Role> todosStatusCollaborator() {
+		return Arrays.asList(Role.values());
 	}
 }
