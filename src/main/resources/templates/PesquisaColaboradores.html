@@ -53,7 +53,9 @@
 							<td class="text-left" th:text="#{|workstation.${collaborator.workstation}|}">Home Office</td>
 							<td class="text-left" th:text="#{|role.${collaborator.role}|}">Programador Java</td>
 							<td class="text-center">
-								<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModal" 
+								<a class="btn btn-link btn-xs" 
+									data-toggle="modal" 
+									data-target="#confirmacaoExclusaoModal" 
 									data:name="${collaborator.name}" 
 									data:url-apagar="@{/colaboradores/{id}(id=${collaborator.id})}"
 									title="Excluir" rel="tooltip" data-placement="top">
