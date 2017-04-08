@@ -23,4 +23,9 @@ public class LoginService {
 	public String validar() {
 		return "TESTE";
 	}
+
+	public List<Login> buscarTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

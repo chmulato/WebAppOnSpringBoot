@@ -1,9 +1,12 @@
 package br.com.caracore.collaborator.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Login {
@@ -15,6 +18,14 @@ public class Login {
 	private String username;
 
 	private String password;
+
+	@NotNull(message = "Perfil é obrigatório!")
+	@Enumerated(EnumType.STRING)
+	private TipoLogin perfil;
+
+	public Login() {
+		super();
+	}
 
 	public Long getId() {
 		return id;
@@ -40,13 +51,22 @@ public class Login {
 		this.password = password;
 	}
 
+	public TipoLogin getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(TipoLogin perfil) {
+		this.perfil = perfil;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((perfil == null) ? 0 : perfil.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
@@ -64,15 +84,17 @@ public class Login {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
+			return false;
+		if (perfil != other.perfil)
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
 			return false;
 		return true;
 	}
