@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import br.com.caracore.collaborator.model.Login;
 import br.com.caracore.collaborator.service.LoginService;
@@ -24,19 +23,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/").permitAll()
+				.anyRequest().authenticated()
 				.antMatchers("/colaboradores").hasAnyRole("ADMINISTRADOR","OPERADOR","VISITANTE")
 				.antMatchers("/colaboradores/**").hasAnyRole("ADMINISTRADOR","OPERADOR")
 				.antMatchers("/contatos").hasAnyRole("ADMINISTRADOR","OPERADOR","VISITANTE")
 				.antMatchers("/contatos/**").hasAnyRole("ADMINISTRADOR","OPERADOR")
-				.anyRequest().authenticated()
 				.and()
 			.formLogin()
-				.loginPage("/login")
-				.permitAll()
-				.and()
-			.logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+				.loginPage("/login");
 	}
 
 	@Autowired

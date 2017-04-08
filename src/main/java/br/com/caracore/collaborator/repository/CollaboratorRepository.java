@@ -8,6 +8,6 @@ import br.com.caracore.collaborator.model.Collaborator;
 
 public interface CollaboratorRepository extends JpaRepository<Collaborator, Long> {
 
-	public List<Collaborator> findByNameContainingIgnoreCaseAndDescriptionContainingIgnoreCase(String name, String description);
+	public List<Collaborator> findByNameContainingIgnoreCase(String name);
 				
 }

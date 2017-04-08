@@ -30,15 +30,11 @@ public class CollaboratorService {
 	public List<Collaborator> filtrar(CollaboratorFilter filter) {
 		List <Collaborator> listar = null;
 		String name = FILTER_ALL;
-		String description = FILTER_ALL;
 		if (filter != null) {
 			if (filter.getName() != null) {
 				name = filter.getName();
 			}
-			if (filter.getDescription() != null) {
-				name = filter.getDescription();
-			}
-			listar = collaboratorRepository.findByNameContainingIgnoreCaseAndDescriptionContainingIgnoreCase(name, description);
+			listar = collaboratorRepository.findByNameContainingIgnoreCase(name);
 		}
 		return listar;
 	}

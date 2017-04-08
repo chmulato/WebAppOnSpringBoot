@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	xmlns:th="http://www.thymeleaf.org"
-	layout:decorate="LayoutSimples">
+	layout:decorate="LayoutSimples"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 	<th:block layout:fragment="conteudo">
 		<form th:action="@{/login}" method="POST">

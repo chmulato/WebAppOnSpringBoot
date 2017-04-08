@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:data="http://www.thymeleaf.org/extras/data-attribute"
 	layout:decorator="LayoutPadrao">
 <head>
 <title>Pesquisa de Colaboradores</title>
@@ -16,14 +17,11 @@
 			</div>
 		</div>
 		<div class="panel-body">
-			<form method="GET" class="form-horizontal" th:action="@{/colaboradores}" th:object="${collaboratorFilter}">
+			<form method="GET" class="form-horizontal" th:action="@{/colaboradores}" th:object="${filtro}">
 			<div class="form-group">
 				<div class="col-sm-4">
 					<div class="input-group">
 						<input class="form-control" placeholder="Qual o nome está procurando?" autofocus="autofocus" th:field="*{name}" />
-					</div>				
-					<div class="input-group">
-						<input class="form-control" placeholder="Qual a descrição está procurando?" th:field="*{description}" />
 						<span class="input-group-btn">
 							<button type="submit" class="btn btn-default">
 								<i class="glyphicon glyphicon-search"></i>
@@ -43,6 +41,7 @@
 							<th class="text-left">Espertises</th>
 							<th class="text-left">Local de Trabalho</th>
 							<th class="text-left">Função</th>
+							<th class="text-center">#</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -53,9 +52,17 @@
 							<td class="text-left" th:text="${collaborator.skills}">Java EE, HTML5, CSS3, javascript</td>
 							<td class="text-left" th:text="#{|workstation.${collaborator.workstation}|}">Home Office</td>
 							<td class="text-left" th:text="#{|role.${collaborator.role}|}">Programador Java</td>
+							<td class="text-center">
+								<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModal" 
+									data:name="${collaborator.name}" 
+									data:url-apagar="@{/colaboradores/{id}(id=${collaborator.id})}"
+									title="Excluir" rel="tooltip" data-placement="top">
+									<span class="glyphicon glyphicon-remove"></span>
+								</a>
+							</td>
 						</tr>
-						<tr>
-							<td colspan="6" th:if="${#lists.isEmpty(colaboradores)}">Nenhum colaborador encontrado!</td>
+						<tr th:if="${collaborators.empty}">
+							<td colspan="7">Nenhum caloborador cadastrado</td>
 						</tr>
 					</tbody>
 				</table>

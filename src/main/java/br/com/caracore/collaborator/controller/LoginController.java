@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.caracore.collaborator.service.LoginService;
 
@@ -14,7 +14,7 @@ public class LoginController {
 	@Autowired
 	public LoginService loginService;
 	
-	@PostMapping("/login")
+	@RequestMapping("/login")
 	public String login(@AuthenticationPrincipal User user) {
 		if (user != null && user.getUsername() != null && user.getPassword() != null) {
 			if ((!user.getUsername().equals("")) && (!user.getPassword().equals(""))) {
