@@ -33,19 +33,19 @@ public class CollaboratorController {
 	@RequestMapping("/novo")
 	public ModelAndView novo() {
 		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
-		mv.addObject("todosStatusTitulo", StatusCollaborator.values());
+		mv.addObject("todosStatusCollaborator", StatusCollaborator.values());
 		mv.addObject(new Collaborator());
 		return mv;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Collaborator titulo, Errors errors, RedirectAttributes attributes) {
+	public String salvar(@Validated Collaborator collaborator, Errors errors, RedirectAttributes attributes) {
 		if (errors.hasErrors()) {
 			return CADASTRO_VIEW;
 		}
 		try {
-			collaboratorService.salvar(titulo);
-			attributes.addFlashAttribute("mensagem", "Título salvo com sucesso!");
+			collaboratorService.salvar(collaborator);
+			attributes.addFlashAttribute("mensagem", "Colaborador salvo com sucesso!");
 			return "redirect:/titulos/novo";
 		} catch (IllegalArgumentException ex) {
 			errors.rejectValue("dataVencimento", null, ex.getMessage());
@@ -56,7 +56,7 @@ public class CollaboratorController {
 	@RequestMapping
 	public ModelAndView pesquisar(@ModelAttribute("filtro") CollaboratorFilter filtro) {
 		List<Collaborator> collaborators = collaboratorService.filtrar(filtro);
-		ModelAndView mv = new ModelAndView("PesquisaTitulos");
+		ModelAndView mv = new ModelAndView("PesquisaColaboradores");
 		mv.addObject("collaborators", collaborators);
 		return mv;
 	}
@@ -72,7 +72,7 @@ public class CollaboratorController {
 	@RequestMapping(value="{codigo}", method = RequestMethod.DELETE)
 	public String excluir(@PathVariable Long codigo, RedirectAttributes attributes) {
 		collaboratorService.excluir(codigo);
-		attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
+		attributes.addFlashAttribute("mensagem", "Colaborador excluído com sucesso!");
 		return "redirect:/titulos";
 	}
 	
@@ -82,8 +82,8 @@ public class CollaboratorController {
 		return collaboratorService.receber(codigo);
 	}
 	
-	@ModelAttribute("todosStatusTitulo")
-	public List<StatusCollaborator> todosStatusTitulo() {
+	@ModelAttribute("todosStatusCollaborator")
+	public List<StatusCollaborator> todosStatusCollaborator() {
 		return Arrays.asList(StatusCollaborator.values());
 	}
 }

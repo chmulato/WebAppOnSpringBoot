@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.caracore.collaborator.model.Collaborator;
 import br.com.caracore.collaborator.repository.CollaboratorRepository;
+import br.com.caracore.collaborator.repository.filter.CollaboratorFilter;
 
 @Service
 @Component
@@ -18,6 +19,29 @@ public class CollaboratorService {
 
 	public List<Collaborator> listAll() {
 		return collaboratorRepository.findAll();
+	}
+
+	public Collaborator buscar(Long codigo) {
+		return collaboratorRepository.findOne(codigo);
+	}
+
+	public List<Collaborator> filtrar(CollaboratorFilter filtro) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void salvar(Collaborator collaborator) {
+		collaboratorRepository.save(collaborator);
+	}
+
+	public void excluir(Long codigo) {
+		collaboratorRepository.delete(codigo);
+		
+	}
+
+	public String receber(Long codigo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

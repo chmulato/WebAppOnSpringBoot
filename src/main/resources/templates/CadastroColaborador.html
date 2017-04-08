@@ -4,17 +4,17 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
 <head>
-<title>Cadastro de T&iacute;tulos</title>
+<title>Cadastro de Colaboradores</title>
 </head>
 <section layout:fragment="conteudo">
-	<form class="form-horizontal" method="POST" th:action="@{/titulos}" th:object="${titulo}">
+	<form class="form-horizontal" method="POST" th:action="@{/colaboradores}" th:object="${titulo}">
 		<div layout:include="MensagemGeral"></div>
 		<div layout:include="MensagemErro"></div>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="clearfix">
-					<h1 class="panel-title aw-titulo-panel">Novo T&iacute;tulo</h1>
-					<a class="btn btn-link aw-link-panel" th:href="@{/titulos}">Voltar para pesquisa</a>
+					<h1 class="panel-title aw-titulo-panel">Novo Colaborador</h1>
+					<a class="btn btn-link aw-link-panel" th:href="@{/colaboradores}">Voltar para pesquisa</a>
 				</div>
 			</div>
 			<div class="panel-body">
@@ -48,7 +48,7 @@
 					<label for="status" class="col-sm-2 control-label">Status</label>
 					<div class="col-sm-2">
 						<select class="form-control" id="status" name="status" th:field="*{status}">
-							<option th:each="status : ${todosStatusTitulo}"
+							<option th:each="status : ${todosStatusCollaborator}"
 								th:value="${status}" th:text="${status.descricao}"></option>
 						</select>
 					</div>

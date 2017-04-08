@@ -4,15 +4,15 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
 <head>
-<title>Pesquisa de T&iacute;tulos</title>
+<title>Pesquisa de Colaboradores</title>
 </head>
 <section layout:fragment="conteudo">
 	<div layout:include="MensagemGeral"></div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<div class="clearfix">
-				<h1 class="panel-title aw-titulo-panel">Pesquisa de T&iacute;tulos</h1>
-				<a class="btn btn-link aw-link-panel" th:href="@{/titulos/novo}">Novo t&iacute;tulo</a>
+				<h1 class="panel-title aw-titulo-panel">Pesquisa de Colaboradores</h1>
+				<a class="btn btn-link aw-link-panel" th:href="@{/colaboradores/novo}">Novo colaborador</a>
 			</div>
 		</div>
 		<div class="panel-body">
@@ -45,16 +45,16 @@
 					</thead>
 					<tbody>
 						<tr th:each="titulo : ${titulos}">
-							<td class="text-center" th:text="${titulo.codigo}">1</td>
+							<td class="text-center" th:text="${colaborador.codigo}">1</td>
 							<td th:text="${titulo.descricao}"></td>
-							<td class="text-center" th:text="${{titulo.dataVencimento}}"></td>
-							<td class="text-right" th:text="|R$ ${{titulo.valor}}|"></td>
-							<td class="text-center" th:attr="data-role=${titulo.codigo}">
+							<td class="text-center" th:text="${{colaborador.dataVencimento}}"></td>
+							<td class="text-right" th:text="|R$ ${{colaborador.valor}}|"></td>
+							<td class="text-center" th:attr="data-role=${colaborador.codigo}">
 								<span class="label" th:text="${titulo.status.descricao}"
 		   							th:classappend="${titulo.pendente ? 'label-danger' : 'label-success'}"></span>
 							</td>
 							<td class="text-center">
-								<a class="btn btn-link btn-xs" th:href="@{/titulos/{codigo}(codigo=${titulo.codigo})}"
+								<a class="btn btn-link btn-xs" th:href="@{/colaboradores/{codigo}(codigo=${titulo.codigo})}"
 									title="Editar" rel="tooltip" data-placement="top">
 									<span class="glyphicon glyphicon-pencil"></span>
 								</a>
@@ -66,13 +66,13 @@
 								<a class="btn btn-link btn-xs js-atualizar-status" th:if="${titulo.pendente}"
 									title="Receber" rel="tooltip" data-placement="top"
 									th:attr="data-codigo=${titulo.codigo}"
-									th:href="@{/titulos/{codigo}/receber(codigo=${titulo.codigo})}">
+									th:href="@{/colaboradores/{codigo}/receber(codigo=${titulo.codigo})}">
 									<span class="glyphicon glyphicon-check"></span>
 								</a>
 							</td>
 						</tr>
 						<tr>
-							<td colspan="6" th:if="${#lists.isEmpty(titulos)}">Nenhum t&iacute;tulo encontrado!</td>
+							<td colspan="6" th:if="${#lists.isEmpty(colaboradores)}">Nenhum colaborador encontrado!</td>
 						</tr>
 					</tbody>
 				</table>
